@@ -1,0 +1,9 @@
+@import '../Theme/mixins';
+
+.error-text {
+  @include secondary-text-bold;
+  text-transform: uppercase;
+  font-size: .6rem;
+  letter-spacing: 1px;
+  color: $primary;
+}

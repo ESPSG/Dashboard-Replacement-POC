@@ -1,0 +1,10 @@
+@import "../../Theme/mixins";
+
+.ant-drawer-content-wrapper {
+  width: 100% !important;
+  min-width: 256px;
+
+  @include responsive($md) {
+    width: 40% !important;
+  }
+}

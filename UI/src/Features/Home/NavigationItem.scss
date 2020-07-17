@@ -1,0 +1,34 @@
+@import "../../Theme/mixins";
+
+.navbar__item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: .2rem;
+  margin-bottom: .1rem;
+
+  &:hover {
+    background-color: $dark-light;
+  }
+
+  &.active {
+    @include primary-font-med;
+    @include card-shadow;
+    z-index: 1;
+    background-color: $darker-light;
+    color: $primary-dark;
+
+    .MuiSvgIcon-colorSecondary {
+      color: $secondary !important;
+    }
+  }
+
+  .navbar__item--icon {
+    padding-right: .5rem;
+  }
+
+  .MuiSvgIcon-colorSecondary {
+    color: $primary-light !important;
+  }
+}

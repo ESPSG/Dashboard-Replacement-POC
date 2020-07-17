@@ -1,0 +1,57 @@
+[
+  {
+    "id": "4cfb6fed-ce51-45ce-ab56-1dc5ebbac0ad",
+    "name": "Adkins, Jelani W.",
+    "grade": 12,
+    "attendance": {
+      "twentyDayAttendance": 0.75,
+      "fortyDayAttendance": 0.80,
+      "ytdAttendance": 0.86,
+      "absences": 12,
+      "unexcusedAbsences": 0,
+      "twentyDayAbsences": 0.20,
+      "fortyDayAbsences": 0.184,
+      "ytdAbsences": 0.117,
+      "stateOffenses": 0,
+      "nonStateOffenses": 0,
+      "ytdTardyRate": 0.0
+    },
+    "grades": {
+      "failing": 4,
+      "belowProficiency": 6,
+      "droppingBelowProficiency": 6,
+      "creditAccumulation": 2.9
+    },
+    "careerReadiness": {
+      "actAspireTaken": false,
+      "actTaken": false
+    }
+  },
+  {
+    "id": "4cfb6fed-ce51-45ce-ab56-1dc5ebbac0ac",
+    "name": "Vaughn, Maggy I.",
+    "grade": 10,
+    "attendance": {
+      "twentyDayAttendance": 0.90,
+      "fortyDayAttendance": 0.925,
+      "ytdAttendance": 0.826,
+      "absences": 15,
+      "unexcusedAbsences": 0,
+      "twentyDayAbsences": 0.59,
+      "fortyDayAbsences": 0.59,
+      "ytdAbsences": 0.137,
+      "stateOffenses": 0,
+      "nonStateOffenses": 0,
+      "ytdTardyRate": 0.0
+    },
+    "grades": {
+      "failing": 1,
+      "belowProficiency": 1,
+      "droppingBelowProficiency": 2,
+      "creditAccumulation": 9.3
+    },
+    "careerReadiness": {
+      "actAspireTaken": true
+    }
+  }
+]

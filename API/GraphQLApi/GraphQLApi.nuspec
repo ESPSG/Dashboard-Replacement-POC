@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>ESPSG.POC.API</id>
+    <version>1.0.0</version>
+    <title>GraphQL POC</title>
+    <authors>Simpat.tech</authors>
+	<description>GraphQL POC</description>
+  </metadata>
+  <files>  
+    <file src=".\publish\**\*.*" target="" />
+  </files>
+</package>

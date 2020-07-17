@@ -1,0 +1,126 @@
+@import "../../Theme/mixins";
+
+.student-grid {
+  max-height: 100%;
+  font-size: .8rem;
+
+  @include responsive-max($md) {
+    margin: 0 -1rem;
+  }
+}
+
+.ant-table {
+  color: unset;
+  line-height: unset;
+
+  .ant-table-column-sorters {
+    padding: .25rem;
+    padding-right: .5rem;
+    align-items: flex-end;
+  }
+}
+
+.ant-table-wrapper {
+  max-width: unset;
+}
+
+.ant-table .ant-table-thead .k-link {
+  height: auto;
+}
+  
+.ant-table .ant-table-thead {
+  white-space: normal;
+}
+
+.k-grouping-header {
+  overflow-x: auto;
+  white-space: nowrap;
+
+  @include responsive-max($md) {
+    padding: 0;
+    font-size: .8rem;
+  }
+}
+
+.ant-table-thead {
+  padding: 0 !important;
+  line-height: 1.1rem;
+}
+
+.ant-table tr:nth-child(odd) td {
+  background-color: $dark-light;
+}
+
+.group-header {
+  font-size: .9rem;
+  color: $primary;
+  text-transform: uppercase;
+  @include primary-font-bold;
+}
+
+.ant-table-thead > tr > th {
+  color: unset;
+  font-weight: unset;
+  @include primary-font-med;
+  background-color: $dark-light;
+  padding: .25rem .5rem;
+  vertical-align: bottom;
+  font-size: .9rem;
+  text-align: center !important;
+
+  &.group-header {
+    background-color: darken($dark-light, 5%) !important;
+    border-width: .2rem .1rem .1rem .1rem;
+    border-color: white;
+    border-style: solid;
+  }
+}
+
+.ant-table-tbody tr {
+  @include animate-slide-down;
+  cursor: pointer;
+  &:hover {
+    td {
+      color: $secondary;
+      background-color: lighten($secondary, 50%) !important;
+    }
+  }
+}
+
+.ant-table-tbody > tr > td {
+  padding: .25rem;
+  padding-right: .5rem;
+  @include primary-font-med;
+
+  transition-property: background-color;
+  transition-duration: 0ms;
+}
+
+.ant-table-column-sorter {
+  margin-top: auto;
+  margin-bottom: .25rem;
+}
+
+.ant-table-thead th.ant-table-column-has-sorters {
+  @include transition(all 0s);
+}
+
+.ant-table-filter-trigger .anticon {
+  bottom: 0;
+  top:unset;
+  margin-bottom: .5rem;
+}
+
+@media only screen and (max-width: 576px) {
+  .ant-pagination-options {
+    display: unset;
+  }
+}
+
+.profile-link-cell:not(th) {
+  &:hover {
+    svg {
+      color: $secondary;
+    }
+  }
+}

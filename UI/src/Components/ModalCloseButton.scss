@@ -1,0 +1,27 @@
+@import "../Theme/mixins";
+
+.close-button {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: -1rem -1rem -1rem auto;
+  cursor: pointer;
+
+  @include responsive-max($md) {
+    margin: -1rem 0 -1rem auto;
+  }
+  &:hover {
+    opacity: 1;
+  }
+  &:focus {
+    outline: none !important;
+  }
+}

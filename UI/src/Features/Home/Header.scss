@@ -1,0 +1,10 @@
+@import '../../Theme/mixins';
+
+.header__hamburger {
+  margin-right: 1rem;
+  cursor: pointer;
+
+  @include responsive($xl) {
+    display: none;
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>ESPSG.POC.UI</id>
+    <version>1.0.0</version>
+    <title>Dashboard UI POC</title>
+    <authors>Simpat.tech</authors>
+	<description>Dashboard UI POC</description>
+  </metadata>
+  <files>  
+    <file src=".\build\**" target="" />
+	<file src="web.config" target="" />
+  </files>
+</package>

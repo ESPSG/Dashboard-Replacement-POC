@@ -1,0 +1,45 @@
+@import "../Theme/mixins";
+
+.pillbar__wrapper {
+  @include flex-vertical-center;
+  @include light-bottom-border;
+  font-size: .9rem;
+  color: $primary-light;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-bottom: .25rem;
+}
+
+.navpill__wrapper {
+  @include primary-font-med;
+  flex-direction: column;
+  padding: .5rem .8rem .5rem .5rem;
+  cursor: pointer;
+  border-radius: .15rem;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  position: relative;
+
+  .navpill--underline {
+    width: 0%;
+    transition: width .2s ease;
+  }
+
+  &:hover:not(.active) {
+    color: $secondary;
+  }
+
+  &.active {
+    color: $secondary;
+    .navpill--underline {
+      @include card-shadow;
+      height: 2px;
+      width: 100%;
+      background-color: $secondary-light;
+      display: block;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}

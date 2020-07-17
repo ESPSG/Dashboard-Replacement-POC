@@ -1,0 +1,97 @@
+@import '../../Theme/mixins';
+
+//grid areas
+.main__header { 
+  @include card-shadow;
+  grid-area: header; 
+  padding-left: 1rem;
+  z-index: 2;
+  background-color: $secondary;
+  color: $light;
+}
+
+.main__footer { 
+  @include flex-center;
+  @include primary-dark-background;
+  grid-area: footer; 
+  font-size: .8rem;
+  z-index: 3;
+}
+
+.main__content { 
+  @include flex-center;
+  grid-area: main; 
+  background-color: $dark-light;
+  transition-duration: 200ms;
+  white-space: nowrap;
+
+  @include responsive-max($xl) {
+    &.blurred {
+      @include blur;
+    }
+  }
+
+  @include responsive($lg) {
+    padding: .5rem;
+  }
+}
+
+.main__left { 
+  @include card-shadow;
+  background-color: $light;
+  grid-area: navigation; 
+
+  //show-hide
+  position: absolute;
+  transition-duration: 200ms;
+  left:-$sidebar-left_width;
+  top: $header_height;
+  width: $sidebar-left_width;
+  height: calc(100% - 4rem);
+
+  &.showing {
+    left: 0;
+    z-index: 1;
+    height: calc(100% - 4rem);
+
+    .navbar__content {
+      height: 100%;
+    }
+  }
+
+  @include responsive($xl) {
+    display: block;
+    position: relative;
+    left: unset;
+    top: unset;
+    width: $sidebar-left_width;
+    height: auto;
+  }
+}
+
+//grid declaration
+.main {
+  display: grid;
+  min-height: 100vh;
+  position: relative;
+
+  //grid
+  grid-template-areas: "header"
+                      "main"
+                      "footer";
+  grid-template-columns: 100%;
+  grid-template-rows: $header_height
+                      1fr
+                      $footer_height;
+  
+  @include responsive($xl) {
+    //grid
+    grid-template-areas: "header header header"
+                        "navigation main main"
+                        "footer footer footer";
+    grid-template-columns: $sidebar-left_width 1fr 1fr;
+    grid-template-rows: $header_height  
+                        1fr
+                        $footer_height;
+  }
+}

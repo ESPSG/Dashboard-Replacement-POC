@@ -1,0 +1,171 @@
+@import "./Theme/custom";
+
+body {
+  all: unset;
+  @include primary-font;
+  background-color: white;
+  color: $primary-dark;
+  position: relative;
+}
+
+h1, h2, h3 {
+  font-weight: unset;
+  color: unset;
+  margin-block-start: unset;
+  margin-block-end: unset;
+  @include primary-font-med;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-size {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+  font-size: 16px;
+}
+
+.error {
+  color: $danger;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.field-label {
+  @include primary-font;
+  margin-bottom: .25rem;
+  text-transform: uppercase;
+  color: $dark-gray;
+  font-size: .8rem;
+  height: auto;
+  white-space: normal;
+  justify-self: flex-start;
+}
+
+.field-value {
+  @include primary-font-med;
+  font-size: 1rem;
+  white-space: normal;
+}
+
+.display-block {
+  margin-bottom: .75rem;
+}
+
+.ant-card {
+  @include card-shadow-light;
+  color: unset;
+  font-size: unset;
+  line-height: unset;
+  height: 100%;
+
+  &.collapsible-card {
+    .ant-card-body {
+      @include transition(all .2s ease);
+      padding: 0 1rem;
+    }
+
+    .ant-card-head {
+      color: $primary;
+    }
+
+    &.open {
+      .ant-card-head {
+        color: $secondary;
+      }
+  
+      .ant-card-body {
+        padding: 1rem 1rem 0 1rem;
+      }
+    }
+  }
+
+  .ant-card-head-wrapper {
+    width: 100%;
+  }
+
+  .ant-card-head {
+    @include primary-font-med;
+    color: $secondary;
+    background-color: $dark-light;
+    text-transform: uppercase;
+    letter-spacing: .05rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    min-height: unset;
+  }
+
+  .ant-card-head-title {
+    padding: .75rem 0;
+  }
+
+  .ant-card-body {
+    padding: 1rem 1rem 0 1rem;
+  }
+}
+
+.MuiCircularProgress-colorPrimary {
+  color: $secondary !important;
+}
+
+.ant-tooltip {
+  font-size: .8rem;
+  min-width: 5rem;
+}
+
+.ant-btn-primary {
+  background: $secondary;
+  border-color: $secondary;
+  span {
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    background: lighten($secondary, 5%);
+    border-color: lighten($secondary, 5%);
+  }
+}
+
+.ant-btn:not(.ant-btn-primary) {
+  &:hover {
+    color: $secondary;
+    border-color: $secondary;
+  }
+}
+
+.ant-input:focus {
+  border-color: $secondary;
+  box-shadow: 0 0 0 2px rgba($secondary, .2);
+}
+
+
+.student-table {
+  @include card-shadow-light;
+  background-color: $light;
+  padding: 1rem;
+  position: relative;
+}

@@ -1,0 +1,103 @@
+@import './variables';
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-horizontal-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin primary-font {
+  font-family: $primary-font;
+}
+
+@mixin primary-font-bold {
+  font-family: $primary-font-bold;
+}
+
+@mixin primary-font-med {
+  font-family: $primary-font-med;
+}
+
+@mixin primary-background {
+  background-color: $primary;
+  color: $light;
+}
+
+@mixin primary-dark-background {
+  background-color: $primary-dark;
+  color: $light;
+}
+
+@mixin animate-slide-in {
+  animation: slide-in-left .2s ease;
+}
+
+@mixin animate-slide-down {
+  animation: slide-down .2s ease;
+}
+
+@mixin animate-fade-in {
+  animation: fade-in .5s ease;
+}
+
+// @mixin secondary-text {
+//   font-family: $secondary-font;
+// }
+
+@mixin no-user-select {
+  -moz-user-select: none; 
+  -webkit-user-select: none; 
+  -ms-user-select:none; 
+  user-select:none;
+  -o-user-select:none;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 .1rem .2rem rgba(0, 0, 0, .2);
+}
+
+@mixin card-shadow-light {
+  box-shadow: 0 0 .3rem rgba(0, 0, 0, .2);
+}
+
+
+@mixin responsive-max($query) {
+  @media screen and ( max-width: + $query ) {
+      @content;
+  }
+}
+
+@mixin responsive($query) {
+  @media screen and ( min-width: + $query ) {
+      @content;
+  }
+}
+
+@mixin blur {
+  -webkit-filter: blur(2px) grayscale(90%);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px) grayscale(90%);
+}
+
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
+}
+
+@mixin light-bottom-border {
+  border-bottom: 1px solid $dark-light;
+}

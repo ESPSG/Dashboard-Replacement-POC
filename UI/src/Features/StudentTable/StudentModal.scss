@@ -1,0 +1,15 @@
+@import "../../Theme/mixins";
+
+.student-modal {
+  background-color: white;
+  padding: 1rem;
+
+  @include responsive-max($md) {
+    margin: 0 -1rem;
+  }
+}
+
+.student-fields-wrapper {
+  position: relative;
+  width: 100%;
+}

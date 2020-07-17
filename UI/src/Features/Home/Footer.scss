@@ -1,0 +1,28 @@
+@import '../../Theme/mixins';
+
+$logo_width: 8rem;
+
+.footer__logo {
+  grid-area: logo;
+}
+
+.footer__content {
+  grid-area: description;
+  text-align: center;
+}
+
+.footer__wrapper {
+  display: grid;
+  padding: .5rem;
+  grid-template-areas: "description"
+                      "logo";
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr
+                      1fr;  
+
+  @include responsive($md) {
+    grid-template-areas:  "description logo";
+    grid-template-columns: 1fr $logo_width;
+    grid-template-rows: 100%;  
+  }
+}
