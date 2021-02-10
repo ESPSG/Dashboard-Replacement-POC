@@ -8,7 +8,9 @@ body {
   position: relative;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: unset;
   color: unset;
   margin-block-start: unset;
@@ -56,10 +58,10 @@ div {
 
 .field-label {
   @include primary-font;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
   text-transform: uppercase;
   color: $dark-gray;
-  font-size: .8rem;
+  font-size: 0.8rem;
   height: auto;
   white-space: normal;
   justify-self: flex-start;
@@ -72,7 +74,7 @@ div {
 }
 
 .display-block {
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
 }
 
 .ant-card {
@@ -84,7 +86,7 @@ div {
 
   &.collapsible-card {
     .ant-card-body {
-      @include transition(all .2s ease);
+      @include transition(all 0.2s ease);
       padding: 0 1rem;
     }
 
@@ -96,7 +98,7 @@ div {
       .ant-card-head {
         color: $secondary;
       }
-  
+
       .ant-card-body {
         padding: 1rem 1rem 0 1rem;
       }
@@ -112,7 +114,7 @@ div {
     color: $secondary;
     background-color: $dark-light;
     text-transform: uppercase;
-    letter-spacing: .05rem;
+    letter-spacing: 0.05rem;
     padding: 0 1rem;
     display: flex;
     align-items: center;
@@ -120,7 +122,7 @@ div {
   }
 
   .ant-card-head-title {
-    padding: .75rem 0;
+    padding: 0.75rem 0;
   }
 
   .ant-card-body {
@@ -133,7 +135,7 @@ div {
 }
 
 .ant-tooltip {
-  font-size: .8rem;
+  font-size: 0.8rem;
   min-width: 5rem;
 }
 
@@ -159,13 +161,22 @@ div {
 
 .ant-input:focus {
   border-color: $secondary;
-  box-shadow: 0 0 0 2px rgba($secondary, .2);
+  box-shadow: 0 0 0 2px rgba($secondary, 0.2);
 }
-
 
 .student-table {
   @include card-shadow-light;
   background-color: $light;
   padding: 1rem;
   position: relative;
+}
+
+.icon {
+  height: 25px;
+  width: 25px;
+  align-items: center;
+}
+
+.logout-link:hover {
+  cursor: pointer;
 }

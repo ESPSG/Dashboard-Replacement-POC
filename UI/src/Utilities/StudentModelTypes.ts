@@ -194,7 +194,7 @@ function getFakeMetricValue(isPercent=false, hasImprovement=true): MetricValue {
 export class Contact implements IAddress {
   cityStateZip(): string | null {
     return this.city || this.state || this.zipCode ? 
-      `${this.city}${this.city ? "," : ""} ${this.state} ${this.zipCode}`
+      `${this.city}${this.city && (this.state || this.zipCode) ? "," : ""} ${this.state ? this.state : ""} ${this.zipCode ? this.zipCode : ""}`
       : null;
   }
 
@@ -222,7 +222,7 @@ export function generateFakeables<T extends IFakeable>(obj: new () => T, min = 1
 export class StudentParentInformation extends Contact implements IFakeable {
   fakeData(): void {
     this.parentUsi = faker.random.number();
-    this.studentUsi = faker.random.number();
+    this.studentUniqueId = faker.random.number();
     this.fullName = faker.name.findName();
     this.relation = randomEnumElement(Relation);
     this.addressLine1 = faker.address.streetAddress();
@@ -234,23 +234,26 @@ export class StudentParentInformation extends Contact implements IFakeable {
     this.telephoneNumber = faker.phone.phoneNumberFormat();
     this.workTelephoneNumber = faker.phone.phoneNumberFormat();
     this.emailAddress = faker.internet.email();
-    this.primaryContact = faker.random.arrayElement([true, false]);
+    this.isPrimaryContact = faker.random.arrayElement([true, false]);
     this.livesWith = faker.random.arrayElement([true, false]);
+	this.homeAddress = faker.address.streetAddress();
+	
   }
 
   parentUsi?: number | null;
-  studentUsi?: number | null;
+  studentUniqueId?: number | null;
   fullName?: string | null;
   relation?: string | null;
   workTelephoneNumber?: string | null;
   emailAddress?: string | null;
-  primaryContact?: boolean;
+  isPrimaryContact?: boolean;
   livesWith?: boolean;
+  homeAddress?:string | null;
 }
 
 export class StudentIndicator implements IFakeable {
   fakeData(): void {
-    this.studentUsi = faker.random.number();
+    this.studentUniqueId = faker.random.number();
     this.educationOrganizationId = faker.random.number();
     this.type = randomEnumElement(StudentIndicatorType);
     this.name = this.type === StudentIndicatorType.Program ? randomEnumElement(Program): randomEnumElement(OtherIdentifier);
@@ -258,7 +261,7 @@ export class StudentIndicator implements IFakeable {
     this.displayOrder = faker.random.number({min: 0, max: 100});
   }
 
-  studentUsi?: number | null;
+  studentUniqueId?: number | null;
   educationOrganizationId?: number | null;
   type?: string | null;
   parentName?: string | null;
@@ -269,7 +272,7 @@ export class StudentIndicator implements IFakeable {
 
 export class StudentSchoolInformation implements IFakeable {
   fakeData(): void {
-    this.studentUsi = faker.random.number();
+    this.studentUniqueId = faker.random.number();
     this.schoolId = faker.random.number();
     this.gradeLevel = faker.random.number(12).toString();
     this.homeroom = faker.random.word();
@@ -283,7 +286,7 @@ export class StudentSchoolInformation implements IFakeable {
     this.expectedGraduationYear = moment(faker.date.future(10)).format(dateFormat);
   }
 
-  studentUsi?: number | null;
+  studentUniqueId?: number | null;
   schoolId?: number | null;
   gradeLevel?: string | null;
   homeroom?: string | null;
@@ -307,7 +310,7 @@ export class StudentModel extends Contact implements IFakeable {
   }
 
   fakeData(): void {
-    this.studentUsi = faker.random.number();
+    this.studentUniqueId = faker.random.number();
     this.fullName = faker.name.findName();
     this.firstName = faker.name.firstName();
     this.middleName = faker.name.firstName();
@@ -365,7 +368,7 @@ export class StudentModel extends Contact implements IFakeable {
     this.studentIndicators = setArrayTypes(StudentIndicator, otherObj.studentIndicators);
   }
 
-  studentUsi?: number | null;
+  studentUniqueId?: number | null;
   fullName?: string | null;
   firstName?: string | null;
   middleName?: string | null;
@@ -391,7 +394,7 @@ export class StudentModel extends Contact implements IFakeable {
 
 export class StudentRowModel implements IFakeable {
   fakeData(): void {
-    this.studentUsi = faker.random.number();
+    this.studentUniqueId = faker.random.number();
     this.name = faker.name.findName();
     this.grade = faker.random.number(12);
     this.attendance = {
@@ -419,7 +422,7 @@ export class StudentRowModel implements IFakeable {
     }
   }
 
-  studentUsi?: number | null;
+  studentUniqueId?: number | null;
   name?: string | null;
   grade?: number | null;
   attendance?: {

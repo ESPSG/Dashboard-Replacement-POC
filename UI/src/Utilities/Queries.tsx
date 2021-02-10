@@ -1,8 +1,8 @@
-export const defaultStudentUsi = 100110233;
+export const defaultStudentUniqueId = 100110233;
 
-export const studentProfileQuery = (studentUsi: number | string) => {
+export const studentProfileQuery = (studentUniqueId: number | string) => {
   return `query{
-    student(studentUsi:${studentUsi})
+    student(studentUniqueId:${studentUniqueId})
       { fullName,
         addressLine1,
         addressLine2,
@@ -21,17 +21,17 @@ export const studentProfileQuery = (studentUsi: number | string) => {
         homeLanguage,
         language,
         parentMilitary
-        studentUsi
+        studentUniqueId
         studentParentInformation {
           fullName,
           relation,
-          addressLine1,
-          addressLine2,
-          addressLine3,
+          homeAddress,
+          physicalAddress,
+          mailingAddress,
           telephoneNumber,
           workTelephoneNumber,
           emailAddress,
-          primaryContact
+          isPrimaryContact
         }
         studentSchoolInformation {
           gradeLevel,
@@ -74,7 +74,7 @@ export const studentMetricsQuery = (metricIds: number[], limit?: number) => {
   return `query {
     students(schoolId:867530011${limit ? `, limit:${limit}` : ""})
       { fullName,
-        studentUsi,
+        studentUniqueId,
         gradeLevel,
         gradeLevelSortOrder,
         schoolName,

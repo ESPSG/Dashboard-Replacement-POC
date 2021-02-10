@@ -68,7 +68,7 @@ export const useInitialTableConfig = () => {
 
   const initialTableConfig: ColumnsType<StudentMetrics> = [
     { children: [ { children: [
-      { dataIndex: "studentUsi", title: "Profile", fixed: "left", 
+      { dataIndex: "studentUniqueId", title: "Profile", fixed: "left", 
         render: (value) => <Tooltip title="Go to profile"><div className="full-size" onClick={() => history.push(withInlineParam(ROUTES.STUDENT_PAGE, value))}>
           <PersonIcon className="color-primary-light profile-link" /></div></Tooltip>,
         align: "center", className: "profile-link-cell"

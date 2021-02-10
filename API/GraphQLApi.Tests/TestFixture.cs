@@ -1,4 +1,5 @@
-﻿using Data.Models;
+﻿using AMT.Data.Common;
+using AMT.Data.Entities;
 using GraphQL;
 using GraphQL.Http;
 using GraphQLApi.Contracts;
@@ -7,9 +8,11 @@ using GraphQLApi.GraphQL.Schema;
 using GraphQLApi.GraphQL.Types;
 using GraphQLApi.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,9 +36,10 @@ namespace GraphQLApi.Tests
 
         private void SetupGraphQLApi(ServiceCollection services)
         {
-            services.AddDbContext<DDSContext>(opt => opt.UseSqlServer("Data Source = localhost; Initial Catalog = GDale_EdFi_Dashboard; Integrated Security = True; MultipleActiveResultSets = True"));
+            services.AddDbContext<ODSContext>(opt => opt.UseSqlServer("Data Source = localhost; Initial Catalog = GDale_EdFi; Integrated Security = True; MultipleActiveResultSets = True"));
 
             services.AddScoped<IStudentInformationRepository, StudentInformationRepository>();
+            services.AddScoped<IStudentMetricCalculator, StudentAttendanceRepository>();
 
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<AppSchema>();
@@ -45,9 +49,6 @@ namespace GraphQLApi.Tests
             services.AddScoped<StudentParentInformationType>();
             services.AddScoped<StudentSchoolInformationType>();
             services.AddScoped<StudentMetricType>();
-            services.AddScoped<MetricMetadataNodeType>();
-            services.AddScoped<IMetricRepository, MetricRepository>();
-            services.AddSingleton<IMetricMetadataRepository, MetricMetadataRepository>();
         }
 
         public async Task<string> QueryGraphQLAsync(string query)

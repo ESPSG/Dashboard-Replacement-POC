@@ -3,13 +3,15 @@ using GraphQLApi.Contracts;
 using GraphQLApi.GraphQL.Types;
 using GraphQLApi.Models;
 using System.Collections.Generic;
+using GraphQL.Authorization;
 
 namespace GraphQLApi.GraphQL.Queries
 {
     public class AppQuery : ObjectGraphType
     {
-        public AppQuery(IStudentInformationRepository repository, IMetricMetadataRepository metadataRepository)
+        public AppQuery(IStudentInformationRepository repository)
         {
+            this.AuthorizeWith("Authorized");
             Field<ListGraphType<StudentInformationType>>(
                 "students",
                 arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "schoolId" }
@@ -33,24 +35,18 @@ namespace GraphQLApi.GraphQL.Queries
 
             Field<StudentInformationType>(
                 "student",
-                arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "studentUsi" }),
+                arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "studentUniqueId" }),
                 resolve: context =>
                 {
-                    var studentUsi = context.GetArgument<int?>("studentUsi");
-                    if (studentUsi.HasValue)
+                    var studentUniqueId = context.GetArgument<int?>("studentUniqueId");
+                    if (studentUniqueId.HasValue)
                     {
-                        return repository.GetStudentByUsi(studentUsi.Value);
+                        return repository.GetStudentByUsi(studentUniqueId.Value);
                     }
                     return null;
                 });
 
-            Field<ListGraphType<MetricMetadataNodeType>>(
-                "metricMetadata",
-                resolve: context =>
-                {
-                    MetricMetadataTree metadataTree = metadataRepository.GetMetadataTree();
-                    return metadataTree.Children;
-                });
+
         }
     }
 }

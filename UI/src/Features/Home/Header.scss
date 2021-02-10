@@ -1,4 +1,4 @@
-@import '../../Theme/mixins';
+@import "../../Theme/mixins";
 
 .header__hamburger {
   margin-right: 1rem;
@@ -7,4 +7,9 @@
   @include responsive($xl) {
     display: none;
   }
+}
+
+.right__button {
+  margin-left: auto !important;
+  margin-right: 0.5rem !important;
 }

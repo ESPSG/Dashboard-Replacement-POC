@@ -1,5 +1,5 @@
 node_modules
-/UI/node_modules
+/API/AMT.Data/obj/
 /API/Data/bin/Debug/netcoreapp3.1
 /API/Data/obj/Debug/netcoreapp3.1
 /API/Data/obj/Release/netcoreapp3.1
@@ -18,3 +18,5 @@ node_modules
 /API/GraphQLApi.Test/obj/GraphQLApi.Test.csproj.nuget.dgspec.json
 /API/GraphQLApi.Tests/bin/Debug/netcoreapp3.1
 /API/GraphQLApi.Tests/obj
+/API/AMT.Data/bin/Debug/netcoreapp3.1
+/API/AMT.Data/obj/Debug/netcoreapp3.1

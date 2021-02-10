@@ -88,12 +88,12 @@
 }
 
 .ant-table-tbody > tr > td {
-  padding: .25rem;
-  padding-right: .5rem;
+  padding: .25rem !important;
+  padding-right: .5rem !important;
   @include primary-font-med;
 
-  transition-property: background-color;
-  transition-duration: 0ms;
+  transition-property: background-color !important;
+  transition-duration: 0ms !important;
 }
 
 .ant-table-column-sorter {

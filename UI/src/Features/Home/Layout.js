@@ -7,7 +7,7 @@ import { toggledClass, formatRoute } from "Utilities/HelperFunctions";
 import HomeIcon from '@material-ui/icons/Home';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import { ROUTES } from "Utilities/Constants";
-import { defaultStudentUsi } from "Utilities/Queries";
+import { defaultStudentUniqueId } from "Utilities/Queries";
 
 const navItemsInitial = [
   {label: "Home", icon: <HomeIcon color="secondary"/>, route: ROUTES.STUDENT_LIST, active: true},

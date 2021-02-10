@@ -1,5 +1,6 @@
-﻿using Data.Models;
+﻿using GraphQL.Authorization;
 using GraphQL.Types;
+using GraphQLApi.Models.Student;
 
 namespace GraphQLApi.GraphQL.Types
 {
@@ -7,7 +8,8 @@ namespace GraphQLApi.GraphQL.Types
     {
         public StudentSchoolInformationType()
         {
-            Field(x => x.StudentUsi, type: typeof(IdGraphType));
+            this.AuthorizeWith("Authorized");
+            Field(x => x.StudentUniqueId, type: typeof(IdGraphType));
             Field(x => x.SchoolId);
             Field(x => x.GradeLevel);
             Field(x => x.Homeroom, true);

@@ -1,17 +1,22 @@
-using Data.Models;
+using AMT.Data.Entities;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
+using GraphQLApi.Common;
 using GraphQLApi.Contracts;
 using GraphQLApi.GraphQL.Schema;
+using GraphQLApi.Infrastructure;
+using GraphQLApi.Infrastructure.Security;
+using GraphQLApi.Models;
 using GraphQLApi.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using GoogleOptions = GraphQLApi.Infrastructure.Security.Models.GoogleOptions;
 
 namespace GraphQLApi
 {
@@ -38,17 +43,61 @@ namespace GraphQLApi
                 });
             });
 
-            services.AddDbContext<DDSContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton<ApiMemoryCache>();
+
+            services.AddDbContext<ODSContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ODSConnection")));
+
+            services.AddScoped<Calculators.CalculatorAppContext>();
+            services.AddScoped<AppUserSecurityContext>();
+            services.AddSingleton<IMetricCalculatorRepository, MetricCalculatorRepository>();
+
+            services.AddScoped<IMetricRepository, MetricRepository>();
 
             services.AddScoped<IStudentInformationRepository, StudentInformationRepository>();
+            services.AddScoped<IStudentMetricCalculator, StudentAttendanceRepository>();
+            services.AddScoped<IStudentDataRepository, StudentDataRepository>();
+            services.AddScoped<IGradingScaleRepository, GradingScaleRepository>();
+
+            var azureAuthSettings = Configuration.GetSection("AzureAd").Get<AzureAdOptions>();
+            var googleAuthSettings = Configuration.GetSection("Google").Get<GoogleOptions>();
+            var authMethod = Configuration.GetSection("AuthenticationMethod").Get<string>();
+            string audience = "";
+            switch (authMethod)
+            {
+                case "Google":
+                case "google":
+                    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                        .AddJwtBearer(options =>
+                        {
+                            options.SecurityTokenValidators.Clear();
+                            options.SecurityTokenValidators.Add(new GoogleTokenValidator(googleAuthSettings));
+                        });
+                    audience = googleAuthSettings.ClientId;
+                    break;
+                case "Azure":
+                case "azure":
+                default:
+                    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                        .AddJwtBearer(options =>
+                        {
+                            options.Audience = azureAuthSettings.ClientId;
+                            options.Authority = azureAuthSettings.Authority;
+                        });
+                    audience = azureAuthSettings.ClientId;
+                    break;
+            }
+            
 
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             services.AddScoped<AppSchema>();
-            services.AddScoped<IMetricRepository, MetricRepository>();
-            services.AddSingleton<IMetricMetadataRepository, MetricMetadataRepository>();
+            services.AddGraphQLAuth(_ =>
+            {
+                _.AddPolicy("Authorized", p => p.RequireClaim("aud", audience));
 
+            });
             services.AddGraphQL(o => { o.ExposeExceptions = false; })
                 .AddGraphTypes(ServiceLifetime.Scoped);
+
 
             services.AddControllers()
                 .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -61,13 +110,14 @@ namespace GraphQLApi
             {
                 options.AllowSynchronousIO = true;
             });
+            services.Configure<AppConfiguration>(Configuration.GetSection("AppSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("DefaultPolicy");
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseGraphQL<AppSchema>();

@@ -1,4 +1,4 @@
-﻿using Data.Models;
+﻿using GraphQL.Authorization;
 using GraphQL.Types;
 using GraphQLApi.Models;
 
@@ -8,6 +8,7 @@ namespace GraphQLApi.GraphQL.Types
     {
         public StudentMetricType()
         {
+            this.AuthorizeWith("Authorized");
             Field(x => x.StudentUsi, type: typeof(IdGraphType));
             Field(x => x.Id);
             Field(x => x.Name);

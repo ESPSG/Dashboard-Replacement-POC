@@ -1,17 +1,16 @@
-﻿using Data.Models;
-using GraphQLApi.Models;
+﻿using GraphQLApi.Models.Student;
 using System.Collections.Generic;
 
 namespace GraphQLApi.Contracts
 {
     public interface IStudentInformationRepository
     {
-        IEnumerable<StudentInformation> GetStudentsBySchool(int schoolId, int? offset, int? limit);
+        IEnumerable<StudentInformation> GetStudentsBySchool(long schoolId, int? offset, int? limit);
         IEnumerable<StudentInformation> GetDefaultStudents();
 
-        StudentInformation GetStudentByUsi(int studentUsi);
-        IEnumerable<StudentIndicator> GetIndicators(int studentUsi);
-        IEnumerable<StudentSchoolInformation> GetSchools(int studentUsi);
-        IEnumerable<StudentParentInformation> GetParentInformations(int studentUsi);
+        StudentInformation GetStudentByUsi(long studentUniqueId);
+        IEnumerable<StudentIndicator> GetIndicators(long studentUniqueId);
+        IEnumerable<StudentSchoolInformation> GetSchools(long studentUniqueId);
+        IEnumerable<StudentParentInformation> GetParentInformations(long studentUniqueId);
     }
 }

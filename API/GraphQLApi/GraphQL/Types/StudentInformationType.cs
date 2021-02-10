@@ -1,9 +1,9 @@
-﻿using Data.Models;
-using GraphQL.Types;
+﻿using GraphQL.Types;
 using GraphQLApi.Contracts;
-using GraphQLApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using GraphQL.Authorization;
+using GraphQLApi.Models.Student;
 
 namespace GraphQLApi.GraphQL.Types
 {
@@ -12,10 +12,11 @@ namespace GraphQLApi.GraphQL.Types
         public StudentInformationType(IStudentInformationRepository studentInformationrepository,
                                       IMetricRepository metricRepository)
         {
-            Field(x => x.StudentUsi, type: typeof(IdGraphType));
+            this.AuthorizeWith("Authorized");
+            Field(x => x.StudentUniqueId, type: typeof(IdGraphType));
             Field(x => x.FullName);
             Field(x => x.FirstName);
-            Field(x => x.MiddleName, nullable:true);
+            Field(x => x.MiddleName, nullable: true);
             Field(x => x.LastSurname);
             Field(x => x.AddressLine1);
             Field(x => x.AddressLine2, nullable: true);
@@ -44,15 +45,15 @@ namespace GraphQLApi.GraphQL.Types
 
             Field<ListGraphType<StudentIndicatorType>>(
             "StudentIndicators",
-                resolve: context => studentInformationrepository.GetIndicators(studentUsi: context.Source.StudentUsi).ToList()
+                resolve: context => studentInformationrepository.GetIndicators(studentUniqueId: context.Source.StudentUniqueId).ToList()
              );
             Field<ListGraphType<StudentSchoolInformationType>>(
                 "StudentSchoolInformation",
-                resolve: context => studentInformationrepository.GetSchools(studentUsi: context.Source.StudentUsi).ToList()
+                resolve: context => studentInformationrepository.GetSchools(studentUniqueId: context.Source.StudentUniqueId).ToList()
             );
             Field<ListGraphType<StudentParentInformationType>>(
                 "StudentParentInformation",
-                 resolve: context => studentInformationrepository.GetParentInformations(studentUsi: context.Source.StudentUsi).ToList()
+                 resolve: context => studentInformationrepository.GetParentInformations(studentUniqueId: context.Source.StudentUniqueId).ToList()
             );
             Field<ListGraphType<StudentMetricType>>(
                 "Metrics",
@@ -67,10 +68,10 @@ namespace GraphQLApi.GraphQL.Types
                         var metricId = context.GetArgument<int?>("metricId");
                         if (metricId.HasValue)
                         {
-                            return metricRepository.GetStudentMetricsById(studentUsi: context.Source.StudentUsi, schoolId: schoolId.Value, metricId: metricId).ToList();
+                            return metricRepository.GetStudentMetricsById(studentUsi: context.Source.StudentUniqueId, schoolId: schoolId.Value, metricId: metricId).ToList();
                         }
                         var metricIds = context.GetArgument<List<int>>("metricIds");
-                        return metricRepository.GetStudentMetricsById(studentUsi: context.Source.StudentUsi, schoolId: schoolId.Value, metricIds: metricIds).ToList();
+                        return metricRepository.GetStudentMetricsById(studentUsi: context.Source.StudentUniqueId, schoolId: schoolId.Value, metricIds: metricIds).ToList();
                     }
                     return null;
                 });

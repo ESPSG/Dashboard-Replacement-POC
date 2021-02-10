@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      window.GOOGLE_CLIENT_ID="#{Google_ClientId}";
+      window.GOOGLE_CLIENT_SECRET="#{Google_Secret}";
+      window.CLIENT_ID = "#{AzureAd_ClientId}";
+      window.TENANT = "#{AzureAd_Tenant}";
+      window.INSTANCE = "#{AzureAd_Instance}";
+      window.BASE_URL = "#{baseUrl}";
+      window.AUTH_TYPE = "#{AuthenticationMethod}"
+    </script>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
